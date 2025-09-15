@@ -876,6 +876,61 @@ img.lazy.loaded {
   padding: 8px 8px 16px;
 }
 
+/* Drawer user header */
+.drawer-user {
+  display: grid;
+  grid-template-columns: 48px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  padding: 12px 12px 4px 12px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+.drawer-user-avatar { width: 48px; height: 48px; border-radius: 50%; background: #e9eef5; display: flex; align-items: center; justify-content: center; }
+.drawer-user-avatar .material-icons { font-size: 36px; color: #6b7a90; }
+.drawer-user-name { display: block; }
+.drawer-user-email { color: #6b7a90; }
+.drawer-user-actions { display: flex; gap: 8px; }
+.drawer-user-chip { width: 36px; height: 36px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: #f2f5f9; color: #34495e; text-decoration: none; }
+.drawer-user-chip:hover { background: #e9eef5; }
+
+/* Drawer quick shortcuts */
+.drawer-shortcuts { display: flex; gap: 10px; padding: 10px 12px; border-bottom: 1px solid rgba(0,0,0,0.06); }
+.drawer-shortcut { width: 40px; height: 40px; border-radius: 10px; border: none; background: #f2f5f9; color: #34495e; display: inline-flex; align-items: center; justify-content: center; }
+.drawer-shortcut:hover { background: #e9eef5; }
+.drawer-shortcut .material-icons { font-size: 22px; }
+
+/* Active state */
+.drawer-link.active, .drawer-link[aria-current="page"] { background: #eef6ff; color: #0b63ce; font-weight: 600; }
+
+/* Smooth animations */
+.drawer, .drawer-submenu, .drawer-link { transition: transform .3s ease, background .2s ease, color .2s ease, opacity .2s ease; }
+.drawer-submenu { transition: height .25s ease; }
+
+/* Drawer footer */
+.drawer-footer { padding: 10px 12px 16px; border-top: 1px solid rgba(0,0,0,0.06); margin-top: 8px; }
+.drawer-footer-link { display: inline-flex; align-items: center; gap: 6px; color: inherit; text-decoration: none; margin-right: 10px; }
+.drawer-footer-link:hover { text-decoration: underline; }
+.drawer-branding { margin-top: 8px; display: flex; align-items: center; gap: 6px; color: #6b7a90; }
+
+/* Empty/loading */
+.drawer-empty { display: flex; align-items: center; gap: 8px; padding: 12px; color: #6b7a90; }
+.spinner { width: 16px; height: 16px; border: 2px solid rgba(0,0,0,0.15); border-top-color: #3498db; border-radius: 50%; animation: spin 1s linear infinite; }
+
+/* Dark mode theming for drawer */
+body.dark .drawer { background: #11161d; }
+body.dark .drawer-user { border-bottom-color: rgba(255,255,255,0.1); }
+body.dark .drawer-user-avatar { background: #1c2330; }
+body.dark .drawer-user-avatar .material-icons { color: #93a4bd; }
+body.dark .drawer-user-email { color: #93a4bd; }
+body.dark .drawer-user-chip { background: #1c2330; color: #dde6f7; }
+body.dark .drawer-user-chip:hover { background: #243049; }
+body.dark .drawer-shortcuts { border-bottom-color: rgba(255,255,255,0.1); }
+body.dark .drawer-shortcut { background: #1c2330; color: #dde6f7; }
+body.dark .drawer-shortcut:hover { background: #243049; }
+body.dark .drawer-link.active { background: #0f1722; color: #4ea1ff; }
+body.dark .drawer-footer { border-top-color: rgba(255,255,255,0.1); }
+body.dark .drawer-branding { color: #93a4bd; }
+
 .drawer-menu {
   list-style: none;
   padding: 0;

@@ -233,14 +233,50 @@
                     this.setAttribute('aria-expanded', String(!expanded));
                     const panel = document.getElementById(this.getAttribute('aria-controls'));
                     if (panel) {
-                        if (expanded) {
-                            panel.hidden = true;
-                        } else {
-                            panel.hidden = false;
-                        }
+                        panel.hidden = expanded;
                     }
                 });
             });
+
+            // Active state highlighting for drawer links
+            const setActive = () => {
+                const links = drawer.querySelectorAll('.drawer-link');
+                const current = window.location.pathname.replace(/\/$/, '');
+                links.forEach(link => {
+                    const href = link.getAttribute('href') || '';
+                    const path = href.replace(/\/$/, '');
+                    const isActive = path && (current === path || current.startsWith(path));
+                    link.classList.toggle('active', isActive);
+                    if (isActive) link.setAttribute('aria-current', 'page'); else link.removeAttribute('aria-current');
+                });
+            };
+            setActive();
+
+            // Keyboard navigation for drawer menu
+            const menu = drawer.querySelector('.drawer-menu');
+            if (menu) {
+                menu.addEventListener('keydown', function(e) {
+                    const items = Array.from(menu.querySelectorAll('a.drawer-link, button.drawer-accordion'));
+                    const index = items.indexOf(document.activeElement);
+                    if (['ArrowDown','ArrowUp','Home','End'].includes(e.key)) e.preventDefault();
+                    if (e.key === 'ArrowDown') { (items[index + 1] || items[0]).focus(); }
+                    else if (e.key === 'ArrowUp') { (items[index - 1] || items[items.length - 1]).focus(); }
+                    else if (e.key === 'Home') { if (items[0]) items[0].focus(); }
+                    else if (e.key === 'End') { if (items[items.length - 1]) items[items.length - 1].focus(); }
+                });
+            }
+
+            // Drawer dark mode toggle mirrors global toggle
+            const drawerThemeToggle = document.getElementById('drawerThemeToggle');
+            if (drawerThemeToggle) {
+                const syncDrawerToggle = () => drawerThemeToggle.setAttribute('aria-pressed', document.body.classList.contains('dark') ? 'true' : 'false');
+                syncDrawerToggle();
+                drawerThemeToggle.addEventListener('click', function() {
+                    const mainToggle = document.getElementById('themeToggle');
+                    if (mainToggle) mainToggle.click();
+                    syncDrawerToggle();
+                });
+            }
 
             // Swipe gestures: open on right-swipe from left edge, close on left-swipe
             function onTouchStart(e) {
