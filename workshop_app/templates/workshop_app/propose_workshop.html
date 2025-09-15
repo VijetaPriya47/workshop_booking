@@ -48,58 +48,129 @@
 
 
 {% block content %}
-    <style type="text/css">
-        .errorlist {
-            color: red;
-        }
-
-    .modal-open .modal{
-        overflow-y: hidden;
-    }
-    </style>
-
-    <div class="container" align="center">
-        <div class="alert alert-info">
-            Note: Before proposing the workshop, please check about the workshop in the
-            <strong>Workshop Types</strong> section
-        </div>
-        <br><br>
-        <div class="col-md-6 col-md-offset-6">
-            <div class="card border-primary">
-                <div class="card-header">
-                    <h3>Propose Workshop</h3>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-8">
+                <!-- Info Alert -->
+                <div class="alert alert-info" role="alert">
+                    <div class="d-flex align-items-center">
+                        <span class="material-icons me-2" aria-hidden="true">info</span>
+                        <div>
+                            <strong>Before proposing a workshop:</strong> Please check the available workshop types 
+                            in the <a href="{% url 'workshop_app:workshop_type_list' %}" class="alert-link">Workshop Types</a> section.
+                        </div>
+                    </div>
                 </div>
-                <div class="card-body">
-                    <div class="form-group">
-                        <form method="post">
+
+                <!-- Proposal Form -->
+                <div class="card">
+                    <div class="card-header text-center">
+                        <h3 class="mb-0">
+                            <span class="material-icons" aria-hidden="true">add_circle</span>
+                            Propose Workshop
+                        </h3>
+                        <p class="text-muted mb-0">Submit your workshop proposal for review</p>
+                    </div>
+                    <div class="card-body">
+                        <form method="post" role="form" aria-label="Workshop proposal form">
                             {% csrf_token %}
-                            <br/>
-                            {{ form.workshop_type }}
-                            <br>
-                            {{ form.date }}
-                            <br>
-                            {{ form.tnc_accepted }} I accept the
-                            <a href="#" id="disp_tnc" data-toggle="modal"
-                            data-target="#exampleModalCenter">
-                                terms and conditions
-                            </a>
-                            <br>
+                            
                             {% if form.errors %}
-                                <br>
-                                <div style="text-align: left; border: 1px solid red; padding-top: 5px">
-                                    <h5 style="text-align: center; color: red; font-weight: bolder">Errors</h5>
-                                    {{ form.errors }}
+                                <div class="alert alert-danger" role="alert">
+                                    <h6 class="alert-heading">
+                                        <span class="material-icons" aria-hidden="true">error</span>
+                                        Please correct the following errors:
+                                    </h6>
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            <div class="mb-1">
+                                                <strong>{{ field.label }}:</strong> {{ error|escape }}
+                                            </div>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}
+                                        <div class="mb-1">
+                                            <strong>General:</strong> {{ error|escape }}
+                                        </div>
+                                    {% endfor %}
                                 </div>
                             {% endif %}
-                            <br>
-                            <button class="btn btn-success" type="submit">Submit</button>
+
+                            <div class="form-group mb-4">
+                                <label for="{{ form.workshop_type.id_for_label }}" class="required">
+                                    <span class="material-icons" aria-hidden="true">category</span>
+                                    Workshop Type
+                                </label>
+                                {{ form.workshop_type }}
+                                <small class="form-text text-muted">
+                                    Select the type of workshop you want to propose
+                                </small>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <label for="{{ form.date.id_for_label }}" class="required">
+                                    <span class="material-icons" aria-hidden="true">event</span>
+                                    Proposed Date
+                                </label>
+                                {{ form.date }}
+                                <small class="form-text text-muted">
+                                    Choose a date at least 3 days from today
+                                </small>
+                            </div>
+
+                            <div class="form-group mb-4">
+                                <div class="form-check">
+                                    {{ form.tnc_accepted }}
+                                    <label class="form-check-label" for="{{ form.tnc_accepted.id_for_label }}">
+                                        I accept the 
+                                        <a href="#" id="disp_tnc" data-toggle="modal" data-target="#exampleModalCenter" 
+                                           class="text-decoration-none">
+                                            terms and conditions
+                                        </a>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button class="btn btn-success btn-lg" type="submit">
+                                    <span class="material-icons" aria-hidden="true">send</span>
+                                    Submit Proposal
+                                </button>
+                            </div>
                         </form>
+                    </div>
+                </div>
+
+                <!-- Help Card -->
+                <div class="card mt-4">
+                    <div class="card-body">
+                        <h6 class="card-title">
+                            <span class="material-icons" aria-hidden="true">help</span>
+                            Need Help?
+                        </h6>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <h6>Proposal Process:</h6>
+                                <ol class="small">
+                                    <li>Select workshop type</li>
+                                    <li>Choose preferred date</li>
+                                    <li>Accept terms & conditions</li>
+                                    <li>Submit for instructor review</li>
+                                </ol>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <h6>What Happens Next:</h6>
+                                <ul class="small">
+                                    <li>Instructor will review your proposal</li>
+                                    <li>You'll receive email notifications</li>
+                                    <li>Check your workshop status regularly</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <br>
-
     </div>
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
