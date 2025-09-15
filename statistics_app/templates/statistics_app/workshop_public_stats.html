@@ -23,11 +23,11 @@
                         {% if request.user.is_authenticated %}
                         <div class="form-group mb-3">{{form.show_workshops.help_text}}: {{form.show_workshops}}</div>
                         {% endif %}
-                        <div class="d-flex flex-wrap">
-                            <button type="submit" class="btn btn-success btn-sm mr-2" style="margin-right:8px;">
+                        <div class="d-flex justify-content-center flex-wrap" style="gap:8px;">
+                            <button type="submit" class="btn btn-success btn-sm" style="padding:6px 14px; width:auto; flex:0 0 auto;">
                                 <i class="fa fa-eye"></i>&nbsp;View
                             </button>
-                            <button type="submit" class="btn btn-info btn-sm" name="download" value="download">
+                            <button type="submit" class="btn btn-info btn-sm" name="download" value="download" style="padding:6px 14px; width:auto; flex:0 0 auto;">
                                 <i class="fa fa-download"></i>&nbsp;Download
                             </button>
                         </div>
@@ -52,7 +52,7 @@
                 </div>
             </div>
             <div class="table-responsive mt-3">
-                <table class="table table-sm align-middle">
+                <table class="table table-sm align-middle table-density-compact table-sticky table-striped table-hover">
                     <thead>
                         <tr>
                             <th>Sr No.</th>
