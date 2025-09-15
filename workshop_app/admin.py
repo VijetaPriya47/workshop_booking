@@ -18,9 +18,10 @@ except ImportError:
 # Custom Classes
 class ProfileAdmin(admin.ModelAdmin):
     list_display = ['title', 'user', 'institute', 'location', 'department',
-                    'phone_number', 'position']
-    list_filter = ['position', 'department']
-    actions = ['download_csv']
+                    'phone_number', 'position', 'is_email_verified']
+    list_filter = ['position', 'department', 'is_email_verified']
+    actions = ['download_csv', 'verify_emails', 'unverify_emails']
+    search_fields = ['user__username', 'user__email', 'user__first_name', 'user__last_name']
 
     def download_csv(self, request, queryset):
         data = queryset.values(
@@ -35,6 +36,18 @@ class ProfileAdmin(admin.ModelAdmin):
         return response
 
     download_csv.short_description = "Download CSV file for selected stats."
+
+    def verify_emails(self, request, queryset):
+        """Verify email for selected profiles"""
+        updated = queryset.update(is_email_verified=True)
+        self.message_user(request, f'{updated} profile(s) email verified successfully.')
+    verify_emails.short_description = "Verify email for selected profiles"
+
+    def unverify_emails(self, request, queryset):
+        """Unverify email for selected profiles"""
+        updated = queryset.update(is_email_verified=False)
+        self.message_user(request, f'{updated} profile(s) email unverified successfully.')
+    unverify_emails.short_description = "Unverify email for selected profiles"
 
 
 class WorkshopAdmin(admin.ModelAdmin):
