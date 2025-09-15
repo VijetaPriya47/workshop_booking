@@ -166,10 +166,11 @@ class WorkshopManager(models.Manager):
         data_states, data_counts = [], []
         if not df.empty:
             grouped_data = df.value_counts().to_dict()
-            for state, count in grouped_data.items():
-                state_name = state[0]
-                data_states.append(states_map[state_name])
-                data_counts.append(count)
+            for state_code, count in grouped_data.items():
+                # state_code is already the key (like "IN-MH"), we need the display name
+                if state_code in states_map:
+                    data_states.append(states_map[state_code])
+                    data_counts.append(count)
         return data_states, data_counts
 
     def get_workshops_by_type(self, workshops):
