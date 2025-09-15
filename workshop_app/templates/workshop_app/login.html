@@ -1,52 +1,97 @@
 {% extends 'workshop_app/base.html' %}
 
 {% block title %}
-    Login
+    Login - FOSSEE Workshops
 {% endblock %}
 
 {% block content %}
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-6 col-md-offset-6">
+            <div class="col-12 col-md-6 col-lg-5">
                 <div class="card">
-                    <div class="card-body">
-                        <form class="px-3 py-3" method="post">
-                        {% csrf_token %}
-                        {% if form.errors %}
-                            {% for field in form %}
-                                {% for error in field.errors %}
-                                    <div class="alert alert-dismissible alert-danger">
-                                        <button type="button" class="close" data-dismiss="alert">
-                                            <i class="fa fa-close"></i>
-                                        </button>
-                                        <strong>{{ error|escape }}</strong>
-                                    </div>
-                                {% endfor %}
-                            {% endfor %}
-                            {% for error in form.non_field_errors %}
-                                <div class="alert alert-dismissible alert-danger">
-                                    <button type="button" class="close" data-dismiss="alert">
-                                        <i class="fa fa-close"></i>
-                                    </button>
-                                    <strong>{{ error|escape }}</strong>
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                        <div class="form-group">
-                          <label for="id_username">Username</label>
-                          {{ form.username }}
-                        </div>
-                        <div class="form-group">
-                          <label for="id_password">Password</label>
-                          {{ form.password }}
-                        </div>
-                        <button type="submit" class="btn btn-primary">Sign in</button>
-                        </form>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="{% url 'workshop_app:register' %}">New around here? Sign up</a>
-                        <a class="dropdown-item" href="{% url 'password_reset' %}">Forgot password?</a>
+                    <div class="card-header text-center">
+                        <h3 class="mb-0">
+                            <span class="material-icons" aria-hidden="true">login</span>
+                            Welcome Back
+                        </h3>
+                        <p class="text-muted mb-0">Sign in to your FOSSEE account</p>
                     </div>
-                </div>  
+                    <div class="card-body">
+                        <form method="post" role="form" aria-label="Login form">
+                            {% csrf_token %}
+                            
+                            {% if form.errors %}
+                                <div class="alert alert-danger" role="alert">
+                                    <h6 class="alert-heading">
+                                        <span class="material-icons" aria-hidden="true">error</span>
+                                        Please correct the following errors:
+                                    </h6>
+                                    {% for field in form %}
+                                        {% for error in field.errors %}
+                                            <div class="mb-1">
+                                                <strong>{{ field.label }}:</strong> {{ error|escape }}
+                                            </div>
+                                        {% endfor %}
+                                    {% endfor %}
+                                    {% for error in form.non_field_errors %}
+                                        <div class="mb-1">
+                                            <strong>General:</strong> {{ error|escape }}
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                            
+                            <div class="form-group">
+                                <label for="id_username" class="required">
+                                    <span class="material-icons" aria-hidden="true">person</span>
+                                    Username
+                                </label>
+                                {{ form.username }}
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="id_password" class="required">
+                                    <span class="material-icons" aria-hidden="true">lock</span>
+                                    Password
+                                </label>
+                                {{ form.password }}
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">
+                                <span class="material-icons" aria-hidden="true">login</span>
+                                Sign In
+                            </button>
+                        </form>
+                        
+                        <div class="text-center mt-4">
+                            <div class="dropdown-divider mb-3"></div>
+                            <div class="d-flex flex-column flex-sm-row justify-content-center gap-2">
+                                <a href="{% url 'workshop_app:register' %}" class="btn btn-outline-primary">
+                                    <span class="material-icons" aria-hidden="true">person_add</span>
+                                    Create Account
+                                </a>
+                                <a href="{% url 'password_reset' %}" class="btn btn-outline-secondary">
+                                    <span class="material-icons" aria-hidden="true">help</span>
+                                    Forgot Password?
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Additional Info Card -->
+                <div class="card mt-4">
+                    <div class="card-body text-center">
+                        <h6 class="card-title">
+                            <span class="material-icons" aria-hidden="true">info</span>
+                            About FOSSEE Workshops
+                        </h6>
+                        <p class="card-text text-muted small">
+                            FOSSEE (Free and Open Source Software for Education) provides free workshops 
+                            to help students and educators learn various open source technologies.
+                        </p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
