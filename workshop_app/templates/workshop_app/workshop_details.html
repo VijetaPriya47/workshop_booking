@@ -1,83 +1,194 @@
 {% extends 'workshop_app/base.html' %}
 
 {% block title %}
-    View Workshop details
+    Workshop Details - {{ workshop.workshop_type }}
 {% endblock %}
 
 {% block content %}
     <div class="container">
-        <table class="table table-bordered">
-            <tr>
-                <th><label for="id_first_name">Workshop Type :</label></th>
-                <td><label for="id_first_name"><a
-                        href="{% url 'workshop_app:workshop_type_details' workshop.workshop_type_id %}">{{ workshop.workshop_type }}</a></label>
-                </td>
-            </tr>
-            <tr>
-                <th><label for="id_last_name">Date :</label></th>
-                <td><label for="id_last_name">{{ workshop.date }}</label></td>
-            </tr>
-            <tr>
-                <th><label for="id_email">Coordinator :</label></th>
-                <td><label for="id_email">{{ workshop.coordinator.get_full_name|title }}</label>
-                </td>
-            </tr>
-            {% if workshop.status %}
-                <tr>
-                    <th><label for="id_institute">Status :</label></th>
-                    <td><span class="badge badge-success">{{ workshop.get_status }}</span></td>
-                </tr>
-                <tr>
-                    <th><label for="id_phone_number">Instructor :</label></th>
-                    <td><label for="id_email">{{ workshop.instructor.get_full_name|title }}</label>
-                    </td>
-                </tr>
-            {% else %}
-                <tr>
-                    <th><label for="id_institute">Status :</label></th>
-                    <td><span class="badge badge-warning">{{ workshop.get_status }}</span></td>
-                </tr>
-            {% endif %}
-        </table>
-        <br>
-        <div class="container">
-            <div class="card mt-2 mb-5">
-                <form method="post">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="mx-3 font-weight-bold">Post a comment</div>
-                            {% if request.user.profile.position == 'instructor' %}
-                                <div class="ml-5">{{ form.public }} Public</div>
-                                <div class="ml-1 text-muted">(Non-public comments are visible only to instructors)</div>
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        {{ form.comment }}
-                    </div>
-                    <button type="submit" class="float-right btn btn-primary btn-md m-2">Post</button>
-                </form>
+        <!-- Workshop Details Card -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3 class="mb-0">
+                    <span class="material-icons" aria-hidden="true">assignment</span>
+                    Workshop Details
+                </h3>
             </div>
-            <br><br>
-            <h2 class="text-center">Comments</h2>
-            <br>
-            {% for comment in workshop_comments %}
-                <div class="card my-2">
-                    <div class="card-header">
-                        <div class="row">
-                            <div class="ml-3 font-weight-bold"><a
-                                    href="{% url 'workshop_app:view_profile' comment.author_id %}">{{ comment.author }}</a></div>
-                            {% if not comment.public %}
-                                <div class="ml-1"><span class="badge badge-dark">Hidden</span></div>
+            <div class="card-body">
+                <!-- Desktop Table View -->
+                <div class="d-none d-md-block">
+                    <table class="table table-borderless" role="table" aria-label="Workshop information">
+                        <tbody>
+                            <tr role="row">
+                                <th scope="row" role="cell" class="text-muted">Workshop Type:</th>
+                                <td role="cell">
+                                    <a href="{% url 'workshop_app:workshop_type_details' workshop.workshop_type_id %}" 
+                                       class="text-decoration-none">
+                                        {{ workshop.workshop_type }}
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr role="row">
+                                <th scope="row" role="cell" class="text-muted">Date:</th>
+                                <td role="cell">{{ workshop.date }}</td>
+                            </tr>
+                            <tr role="row">
+                                <th scope="row" role="cell" class="text-muted">Coordinator:</th>
+                                <td role="cell">{{ workshop.coordinator.get_full_name|title }}</td>
+                            </tr>
+                            <tr role="row">
+                                <th scope="row" role="cell" class="text-muted">Status:</th>
+                                <td role="cell">
+                                    {% if workshop.status %}
+                                        <span class="badge badge-success">{{ workshop.get_status }}</span>
+                                    {% else %}
+                                        <span class="badge badge-warning">{{ workshop.get_status }}</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% if workshop.status %}
+                            <tr role="row">
+                                <th scope="row" role="cell" class="text-muted">Instructor:</th>
+                                <td role="cell">{{ workshop.instructor.get_full_name|title }}</td>
+                            </tr>
                             {% endif %}
-                            <div class="ml-3 text-muted">{{ comment.created_date }}</div>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Mobile Card View -->
+                <div class="d-md-none">
+                    <div class="row">
+                        <div class="col-12 mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="material-icons text-muted me-2" aria-hidden="true">category</span>
+                                <strong>Workshop Type:</strong>
+                            </div>
+                            <a href="{% url 'workshop_app:workshop_type_details' workshop.workshop_type_id %}" 
+                               class="text-decoration-none">
+                                {{ workshop.workshop_type }}
+                            </a>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <p>{{ comment.comment }}</p>
+                        
+                        <div class="col-12 mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="material-icons text-muted me-2" aria-hidden="true">event</span>
+                                <strong>Date:</strong>
+                            </div>
+                            {{ workshop.date }}
+                        </div>
+                        
+                        <div class="col-12 mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="material-icons text-muted me-2" aria-hidden="true">person</span>
+                                <strong>Coordinator:</strong>
+                            </div>
+                            {{ workshop.coordinator.get_full_name|title }}
+                        </div>
+                        
+                        <div class="col-12 mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="material-icons text-muted me-2" aria-hidden="true">info</span>
+                                <strong>Status:</strong>
+                            </div>
+                            {% if workshop.status %}
+                                <span class="badge badge-success">{{ workshop.get_status }}</span>
+                            {% else %}
+                                <span class="badge badge-warning">{{ workshop.get_status }}</span>
+                            {% endif %}
+                        </div>
+                        
+                        {% if workshop.status %}
+                        <div class="col-12 mb-3">
+                            <div class="d-flex align-items-center mb-2">
+                                <span class="material-icons text-muted me-2" aria-hidden="true">school</span>
+                                <strong>Instructor:</strong>
+                            </div>
+                            {{ workshop.instructor.get_full_name|title }}
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
-            {% endfor %}
+            </div>
+        </div>
+        <!-- Comments Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h4 class="mb-0">
+                    <span class="material-icons" aria-hidden="true">comment</span>
+                    Post a Comment
+                </h4>
+            </div>
+            <div class="card-body">
+                <form method="post" role="form" aria-label="Add comment form">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="{{ form.comment.id_for_label }}">Your Comment:</label>
+                        {{ form.comment }}
+                    </div>
+                    {% if request.user.profile.position == 'instructor' %}
+                    <div class="form-group">
+                        <div class="form-check">
+                            {{ form.public }}
+                            <label class="form-check-label" for="{{ form.public.id_for_label }}">
+                                Public Comment
+                            </label>
+                        </div>
+                        <small class="form-text text-muted">
+                            Non-public comments are visible only to instructors
+                        </small>
+                    </div>
+                    {% endif %}
+                    <button type="submit" class="btn btn-primary">
+                        <span class="material-icons" aria-hidden="true">send</span>
+                        Post Comment
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Comments List -->
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">
+                    <span class="material-icons" aria-hidden="true">forum</span>
+                    Comments
+                    <span class="badge badge-primary ml-2">{{ workshop_comments|length }}</span>
+                </h4>
+            </div>
+            <div class="card-body">
+                {% for comment in workshop_comments %}
+                <div class="comment-card mb-3">
+                    <div class="comment-header">
+                        <div class="d-flex justify-content-between align-items-center flex-wrap">
+                            <div class="d-flex align-items-center">
+                                <span class="material-icons me-2" aria-hidden="true">person</span>
+                                <a href="{% url 'workshop_app:view_profile' comment.author_id %}" 
+                                   class="text-decoration-none font-weight-bold">
+                                    {{ comment.author }}
+                                </a>
+                                {% if not comment.public %}
+                                    <span class="badge badge-dark ml-2">Hidden</span>
+                                {% endif %}
+                            </div>
+                            <div class="text-muted small">
+                                <span class="material-icons" aria-hidden="true" style="font-size: 1rem;">schedule</span>
+                                {{ comment.created_date }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comment-body">
+                        <p class="mb-0">{{ comment.comment }}</p>
+                    </div>
+                </div>
+                {% empty %}
+                <div class="text-center py-4">
+                    <span class="material-icons" aria-hidden="true" style="font-size: 3rem; color: var(--text-muted);">comment</span>
+                    <h5 class="mt-3 text-muted">No Comments Yet</h5>
+                    <p class="text-muted">Be the first to comment on this workshop!</p>
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 
