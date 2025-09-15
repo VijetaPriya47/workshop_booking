@@ -1,19 +1,37 @@
 /**
- * Footer Styles
+ * Base Styles - Enhanced for Mobile
  */
 .navbar {
     z-index: 1000;
 }
+
 .footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #61615F;
+    background: linear-gradient(135deg, var(--primary-color, #2c3e50) 0%, #34495e 100%);
     color: white;
     text-align: center;
+    padding: 1.5rem 0;
+    margin-top: 3rem;
+    position: relative;
+    bottom: 0;
+    width: 100%;
     z-index: 100;
 }
+
 .base-content {
-    padding-top: 5em;
-    padding-bottom: 5em;
+    padding-top: 6rem;
+    padding-bottom: 2rem;
+    min-height: calc(100vh - 200px);
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+    .base-content {
+        padding-top: 5rem;
+        padding-bottom: 1rem;
+    }
+    
+    .footer {
+        padding: 1rem 0;
+        margin-top: 2rem;
+    }
 }
