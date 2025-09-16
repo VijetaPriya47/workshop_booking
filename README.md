@@ -155,7 +155,8 @@ workshop_booking/
 
 #### **Landing Page**
 
-![Landing Page 1](https://github.com/user-attachments/assets/d883216e-88b0-4216-aeb7-1e0233385e21)
+![Landing Page 1](<img width="1870" height="967" alt="image" src="https://github.com/user-attachments/assets/081aed72-9eb5-4dbf-b88d-9b477db1f597" />
+)
 ![Landing Page 2](https://github.com/user-attachments/assets/6792b3e1-039b-4e1d-bc5f-a0065b376f3e)
 ![Landing Page 3](https://github.com/user-attachments/assets/2852c984-993a-4597-bd6a-365686ddcc58)
 
