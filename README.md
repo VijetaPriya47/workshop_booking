@@ -28,18 +28,18 @@
 
 4. **Set up the database**
    ```bash
-   python manage.py makemigrations
-   python manage.py migrate
+   python3 manage.py makemigrations
+   python3 manage.py migrate
    ```
 
 5. **Create an admin account**
    ```bash
-   python manage.py createsuperuser
+   python3 manage.py createsuperuser
    ```
 
 6. **Fire it up**
    ```bash
-   python manage.py runserver
+   python3 manage.py runserver
    ```
 
 7. **Check it out**
