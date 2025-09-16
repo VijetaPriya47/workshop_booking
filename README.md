@@ -70,6 +70,12 @@
 - Button -> Registration
 - Button -> Dark Mode
 
+  
+### Statistics
+
+  <img width="1867" height="951" alt="image" src="https://github.com/user-attachments/assets/de78298c-9b1b-4a36-991c-2eb456f700e5" />
+
+
 ### Tablet
 
 ![Tablet](https://github.com/user-attachments/assets/f553ec88-5a0d-4bca-9919-662b33d0b0d6)
