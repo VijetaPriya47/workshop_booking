@@ -1,20 +1,59 @@
-# **Workshop Booking**
+# Workshop Booking Platform - Comprehensive Enhancement Report
 
-> This website is for coordinators to book a workshop(s), they can book a workshop based on instructors posts or can propose a workshop date based on their convenience.
+## 📋 **Setup Instructions**
 
+### **Prerequisites**
+- Python 3.x
+- Git
+- Virtual environment (recommended)
 
-### Features
-* Statistics
-    1. Instructors Only
-        * Monthly Workshop Count
-        * Instructor/Coordinator Profile stats
-        * Upcoming Workshops
-        * View/Post comments on Coordinator's Profile
-    2. Open to All
-        * Workshops taken over Map of India
-        * Pie chart based on Total Workshops taken to Type of Workshops.
+### **Installation Steps**
 
-* Workshop Related Features
-    > Instructors can Accept, Reject or Delete workshops based on their preference, also they can postpone a workshop based on coordinators request.
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/FOSSEE/workshop_booking.git
+   cd workshop_booking
+   ```
 
-__NOTE__: Check docs/Getting_Started.md for more info.
+2. **Create and activate virtual environment**
+   ```bash
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+
+3. **Install dependencies**
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Run database migrations**
+   ```bash
+   python manage.py makemigrations
+   python manage.py migrate
+   ```
+
+5. **Create superuser account**
+   ```bash
+   python manage.py createsuperuser
+   ```
+
+6. **Start development server**
+   ```bash
+   python manage.py runserver
+   ```
+
+7. **Access the application**
+   - Main application: `http://localhost:8000`
+   - Admin panel: `http://localhost:8000/admin`
+
+8. **Configure user roles**
+   - Go to admin panel → Groups
+   - Create a group called "instructor" with all permissions
+   - Assign instructor role to users as needed
+
+### **Mobile Testing Setup**
+- **Chrome DevTools**: F12 → Device Toolbar
+- **Firefox Responsive Design**: F12 → Responsive Design Mode
+- **Safari Web Inspector**: Develop → Enter Responsive Design Mode
+
+---
