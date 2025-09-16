@@ -1,0 +1,136 @@
+{% extends 'workshop_app/base.html' %}
+{% load static %}
+
+{% block title %}Modern Landing{% endblock %}
+
+{% block extra-dependencies %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'workshop_app/css/modern-desktop.css' %}">
+{% endblock %}
+
+{% block content %}
+<a class="skip-link" href="#site-main">Skip to content</a>
+
+<main id="site-main" class="site-main">
+  <!-- Hero Section -->
+  <section class="section hero">
+    <div class="container-xl hero__grid">
+      <div class="hero__content" style="grid-column: 1 / -1;">
+        <h1 class="display">Learn by Doing with <span class="u-accent">FOSSEE Workshops</span>.</h1>
+        <p class="lede">Hands‑on, instructor‑led sessions across programming, scientific computing, electronics, open‑source tools and more. Join thousands of learners who have upgraded their skills with real projects and expert support.</p>
+        <div class="hero__actions">
+          <a class="btn btn-dark btn-rounded" href="{% url 'workshop_app:register' %}">Register</a>
+          <a class="btn btn-ghost btn-rounded" href="{% url 'workshop_app:workshop_type_list' %}">Search Workshops</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sign In section embedded on the landing page -->
+  <section id="signin" class="section section--tight">
+    <div class="container-xl">
+      <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 32px; align-items: start;">
+        <div>
+          <h2 class="h2">Sign in to continue</h2>
+          <p class="subtle">Access your dashboard to propose or manage workshops. New here? Register and explore upcoming sessions.</p>
+        </div>
+        <div>
+          <form method="post" action="{% url 'workshop_app:login' %}" class="card-min" style="padding: 20px;">
+            {% csrf_token %}
+            {% if login_form and login_form.non_field_errors %}
+            <div class="alert alert-danger">{{ login_form.non_field_errors|join:', ' }}</div>
+            {% endif %}
+            <div class="form-group">
+              <label for="id_username" class="required">Username or Email</label>
+              <input type="text" name="username" class="form-control" id="id_username" required>
+            </div>
+            <div class="form-group">
+              <label for="id_password" class="required">Password</label>
+              <input type="password" name="password" class="form-control" id="id_password" required>
+            </div>
+            <div style="display:flex; gap: 10px; align-items:center;">
+              <button type="submit" class="btn btn-primary btn-rounded">Sign In</button>
+              <a href="{% url 'password_reset' %}" class="link-arrow" style="margin-left:auto;">Forgot password?</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Value Section -->
+  <section id="solutions" class="section section--alt">
+    <div class="container-xl">
+      <div class="section__head">
+        <h2 class="h2">Workshops designed for impact.</h2>
+        <p class="subtle">From fundamentals to advanced topics—shaped by academia and industry mentors, delivered with open‑source tools.</p>
+      </div>
+      <div class="grid grid--3">
+        <article class="card-min">
+          <h3 class="h5">Programming & Data</h3>
+          <p>Python, C/C++, data analysis, visualization. Build strong problem‑solving skills.</p>
+          <a class="link-arrow" href="{% url 'workshop_app:workshop_type_list' %}">Explore</a>
+        </article>
+        <article class="card-min">
+          <h3 class="h5">Engineering & Simulation</h3>
+          <p>Scilab, OpenFOAM, eSim, OpenModelica—simulate real‑world systems and validate designs.</p>
+          <a class="link-arrow" href="{% url 'workshop_app:workshop_type_list' %}">Explore</a>
+        </article>
+        <article class="card-min">
+          <h3 class="h5">Electronics & IoT</h3>
+          <p>Arduino, microcontrollers, circuit design, IoT prototypes with open‑source stacks.</p>
+          <a class="btn btn-accent btn-sm btn-rounded" href="{% url 'workshop_app:workshop_type_list' %}">Find a session</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cases Section -->
+  <section id="cases" class="section">
+    <div class="container-xl">
+      <div class="section__head">
+        <h2 class="h2">Trusted by institutions nationwide</h2>
+        <p class="subtle">Universities, colleges, and research labs use FOSSEE Workshops to accelerate learning outcomes.</p>
+      </div>
+      <div class="grid grid--3">
+        <article class="case">
+          <header class="case__head">Large‑scale Python Bootcamps</header>
+          <div class="case__body">
+            <p>Multi‑day bootcamps delivered to 300+ learners with project‑based evaluation.</p>
+            <a class="link-arrow" href="{% url 'statistics_app:public' %}">View stats</a>
+          </div>
+        </article>
+        <article class="case">
+          <header class="case__head">Simulation for Engineers</header>
+          <div class="case__body">
+            <p>Hands‑on CFD/CAE training with open tools, enabling quick concept‑to‑validation cycles.</p>
+            <a class="link-arrow" href="{% url 'workshop_app:workshop_type_list' %}">Browse</a>
+          </div>
+        </article>
+        <article class="case">
+          <header class="case__head">Faculty Development</header>
+          <div class="case__body">
+            <p>Workshops tailored for educators to integrate open‑source tools into curriculum.</p>
+            <a class="link-arrow" href="{% url 'workshop_app:workshop_type_list' %}">See programs</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="insights" class="section section--tight">
+    <div class="container-xl cta">
+      <h3 class="h3">Ready to host or join a FOSSEE Workshop?</h3>
+      <div>
+        <a class="btn btn-dark btn-rounded" href="{% url 'workshop_app:register' %}">Register</a>
+        <a class="btn btn-ghost btn-rounded" href="{% url 'workshop_app:workshop_type_list' %}">Search Workshops</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+{% endblock %}
+
+

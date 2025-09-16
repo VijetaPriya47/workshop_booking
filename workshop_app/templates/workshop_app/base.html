@@ -29,7 +29,9 @@
     <link rel="stylesheet" href="{% static 'workshop_app/css/base.css' %}" type="text/css"/>
     <link rel="stylesheet" href="{% static 'workshop_app/css/font-awesome.css' %}" type="text/css"/>
     <link rel="stylesheet" href="{% static 'workshop_app/css/mobile-first.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'workshop_app/css/desktop.css' %}" type="text/css"/>
     <link rel="stylesheet" href="{% static 'workshop_app/css/sidebar.css' %}" type="text/css"/>
+    <link rel="stylesheet" href="{% static 'workshop_app/css/bottom-nav.css' %}" type="text/css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
 
     {% block extra-custom-scripts %}
@@ -394,5 +396,36 @@
         </div>
         {% endblock %}
     </footer>
+    <!-- Mobile Bottom Navigation -->
+    <nav class="bottom-nav" role="navigation" aria-label="Primary mobile">
+        <a href="/" class="bottom-nav__item is-active" data-nav="home" aria-label="Home" aria-current="page">
+            <span class="material-icons bottom-nav__icon" aria-hidden="true">home</span>
+            <span class="bottom-nav__label">Home</span>
+        </a>
+        <a href="{% url 'statistics_app:public' %}" class="bottom-nav__item" data-nav="search" aria-label="Search">
+            <span class="material-icons bottom-nav__icon" aria-hidden="true">search</span>
+            <span class="bottom-nav__label">Search</span>
+        </a>
+        <a href="{% url 'workshop_app:workshop_type_list' %}" class="bottom-nav__item bottom-nav__fab" data-nav="create" aria-label="Create">
+            <span class="material-icons" aria-hidden="true">add</span>
+        </a>
+        <a href="{% url 'workshop_app:workshop_status_instructor' %}" class="bottom-nav__item" data-nav="notify" aria-label="Notifications">
+            <span class="material-icons bottom-nav__icon" aria-hidden="true">notifications_none</span>
+            <span class="bottom-nav__label">Alerts</span>
+            <span class="bottom-nav__dot" aria-hidden="true"></span>
+        </a>
+        {% if user.is_authenticated %}
+        <a href="{% url 'workshop_app:view_own_profile' %}" class="bottom-nav__item" data-nav="profile" aria-label="Profile">
+            <span class="material-icons bottom-nav__icon" aria-hidden="true">account_circle</span>
+            <span class="bottom-nav__label">Profile</span>
+        </a>
+        {% else %}
+        <a href="{% url 'workshop_app:login' %}" class="bottom-nav__item" data-nav="profile" aria-label="Sign in">
+            <span class="material-icons bottom-nav__icon" aria-hidden="true">login</span>
+            <span class="bottom-nav__label">Sign In</span>
+        </a>
+        {% endif %}
+    </nav>
+    <script src="{% static 'workshop_app/js/bottom-nav.js' %}"></script>
 </body>
 </html>

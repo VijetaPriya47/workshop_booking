@@ -62,8 +62,15 @@ def index(request):
     user = request.user
     if user.is_authenticated and is_email_checked(user):
         return redirect(get_landing_page(user))
+    # Show the modern marketing landing page for unauthenticated users
+    return render(request, 'workshop_app/modern_landing.html')
 
-    return redirect(reverse('workshop_app:login'))
+
+def modern_landing(request):
+    """Public marketing-style landing page inspired by the provided design.
+    Accessible without authentication.
+    """
+    return render(request, 'workshop_app/modern_landing.html')
 
 
 # User views
@@ -77,6 +84,11 @@ def user_login(request):
     if user.is_authenticated:
         return redirect(get_landing_page(user))
 
+    # Render the modern marketing landing at /login with embedded sign-in form
+    if request.method == "GET":
+        form = UserLoginForm()
+        return render(request, 'workshop_app/modern_landing.html', {"login_form": form})
+
     if request.method == "POST":
         form = UserLoginForm(request.POST)
         if form.is_valid():
@@ -87,10 +99,10 @@ def user_login(request):
             else:
                 return render(request, 'workshop_app/activation.html')
         else:
-            return render(request, 'workshop_app/login.html', {"form": form})
+            return render(request, 'workshop_app/modern_landing.html', {"login_form": form})
     else:
         form = UserLoginForm()
-        return render(request, 'workshop_app/login.html', {"form": form})
+        return render(request, 'workshop_app/modern_landing.html', {"login_form": form})
 
 
 def user_logout(request):

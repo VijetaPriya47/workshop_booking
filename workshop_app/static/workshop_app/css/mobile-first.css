@@ -246,7 +246,7 @@ body.dark .navbar .nav-item.dropdown .dropdown-item:hover { background: #1f2530;
 
 /* Main Content */
 .base-content {
-  padding-top: 6rem;
+  padding-top: 40rem;
   padding-bottom: 2rem;
   min-height: calc(100vh - 200px);
 }

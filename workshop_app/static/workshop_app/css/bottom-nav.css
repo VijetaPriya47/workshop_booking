@@ -1,0 +1,98 @@
+/* Mobile Bottom Navigation Bar - inspired by YouTube */
+/* Uses existing CSS variables defined in mobile-first.css for colors */
+
+@media (max-width: 768px) {
+  .bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 64px;
+    background: #ffffff;
+    border-top: 1px solid var(--border-color, #e5e7eb);
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    align-items: center;
+    gap: 4px;
+    z-index: 1040;
+    padding: 6px 6px calc(6px + env(safe-area-inset-bottom));
+  }
+
+  .bottom-nav__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 52px;
+    border-radius: 9999px;
+    color: var(--text-color, #111827);
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    transition: background .2s ease, color .2s ease, transform .08s ease;
+  }
+
+  .bottom-nav__item:active { transform: translateY(1px); }
+
+  .bottom-nav__icon {
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  /* Label visible for accessibility, can be hidden visually if desired */
+  .bottom-nav__label {
+    font-size: 11px;
+  }
+
+  /* Active state chip */
+  .bottom-nav__item.is-active {
+    background: rgba(52, 152, 219, 0.12);
+    color: var(--secondary-color, #3498db);
+  }
+
+  /* Notification/Activity dot */
+  .bottom-nav__dot {
+    position: absolute;
+    top: 10px;
+    right: 18px;
+    width: 8px;
+    height: 8px;
+    background: #e03636; /* red */
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px #fff;
+  }
+
+  /* Middle FAB style (e.g., create video) */
+  .bottom-nav__fab {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -22px; /* pop out */
+    background: linear-gradient(135deg, var(--secondary-color, #3498db) 0%, #2980b9 100%);
+    color: #fff;
+    box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+  }
+
+  /* Motion for icon/label */
+  .bottom-nav__item .bottom-nav__icon, .bottom-nav__item .bottom-nav__label {
+    transition: transform .24s ease, opacity .24s ease, color .2s ease;
+  }
+
+  .bottom-nav__item.is-active .bottom-nav__icon { transform: translateY(-1px) scale(1.05); }
+
+  /* Dark mode */
+  body.dark .bottom-nav { background: #0f1216; border-top-color: rgba(255,255,255,0.08); }
+  body.dark .bottom-nav__item { color: #e6e6e6; }
+  body.dark .bottom-nav__item.is-active { background: rgba(78,161,255,0.14); color: #4ea1ff; }
+  body.dark .bottom-nav__dot { box-shadow: 0 0 0 2px #0f1216; }
+}
+
+/* Hide on larger breakpoints */
+@media (min-width: 769px) {
+  .bottom-nav { display: none; }
+}
+
+
