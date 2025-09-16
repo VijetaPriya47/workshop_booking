@@ -246,7 +246,8 @@ body.dark .navbar .nav-item.dropdown .dropdown-item:hover { background: #1f2530;
 
 /* Main Content */
 .base-content {
-  padding-top: 40rem;
+  /* Ensure content clears fixed navbar without creating huge whitespace */
+  padding-top: 7rem;
   padding-bottom: 2rem;
   min-height: calc(100vh - 200px);
 }

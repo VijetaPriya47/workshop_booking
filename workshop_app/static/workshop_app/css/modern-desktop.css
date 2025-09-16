@@ -16,7 +16,7 @@ body[data-user-authenticated="true"],
 body:has(.site-main),
 body:has(#site-main) { 
   font-family: 'Inter', var(--font-sans, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial) !important;
-  padding-top: 120px !important;
+  padding-top: 0 !important;
   padding-left: 0 !important;
   padding-right: 0 !important;
   padding-bottom: 0 !important;
@@ -36,6 +36,40 @@ body:has(#site-main) {
 .topbar__cta { margin-left: auto; }
 
 .btn { border: none; border-radius: 10px; padding: 12px 18px; font-weight: 600; cursor: pointer; transition: transform .06s ease, box-shadow .2s ease, background .2s ease; }
+.btn-cta {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  transform: translateZ(0);
+}
+.btn-cta::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120px 120px at var(--x, 50%) var(--y, 50%), rgba(255,255,255,.25), transparent 60%);
+  opacity: 0;
+  transition: opacity .25s ease;
+  pointer-events: none;
+}
+.btn-cta:hover::before,
+.btn-cta:focus::before { opacity: 1; }
+.btn-cta:active { transform: translateY(0); }
+.btn-cta .wave {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 4px; height: 4px;
+  background: rgba(255,255,255,.45);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+}
+.btn-cta.ripple .wave {
+  animation: ripple .6s ease-out forwards;
+}
+@keyframes ripple {
+  to { transform: translate(-50%, -50%) scale(60); opacity: 0; }
+}
 .btn-rounded { border-radius: 9999px; }
 .btn-accent { background: var(--brand-green); color: #0b120e; }
 .btn-accent:hover { background: var(--brand-green-dark); color: #0b120e; box-shadow: 0 8px 20px rgba(143,191,90,.35); transform: translateY(-1px); }
@@ -79,6 +113,8 @@ body:has(#site-main) {
 .u-accent { color: var(--brand-green-dark); box-shadow: inset 0 -10px 0 rgba(143,191,90,.45); }
 .lede { font-size: 18px; color: #374151; max-width: 62ch; }
 .hero__actions { display: flex; gap: 12px; margin-top: 20px; }
+.hero__actions .btn { will-change: transform; }
+.hero__actions .btn:hover { transform: translateY(-2px) scale(1.02); }
 
 /* media card removed in this variant */
 .badge { font-size: 12px; padding: 6px 10px; border-radius: 9999px; font-weight: 600; }
@@ -133,7 +169,7 @@ body.dark .topbar__link:hover { background: #1f2530; color: #fff; }
   body[data-user-authenticated="true"],
   body:has(.site-main),
   body:has(#site-main) { 
-    padding-top: 100px !important;
+    padding-top: 0 !important;
   }
   
   /* Container adjustments */
