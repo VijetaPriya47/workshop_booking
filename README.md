@@ -230,5 +230,28 @@ The biggest challenge for me was integrating the modern landing page features wi
 - Making the sign-in section feel like part of the landing page, not an afterthought
 - Ensuring the flow felt natural whether users were logged in or out
 
+#### **My Approach**
 
+##### **1. Understanding User Flow**
+I spent time thinking about how users actually use the site - they browse workshops first, get interested, then decide to sign up or log in. The transition needed to feel smooth and logical.
+
+##### **2. Design Integration**
+Instead of having separate pages, I embedded the sign-in form directly into the landing page. This way users could see workshop information and sign in without losing context.
+
+##### **3. Visual Consistency**
+I made sure the sign-in section used the same colors, fonts, and styling as the rest of the landing page. No more jarring transitions between different design styles.
+
+##### **4. User Experience Focus**
+I prioritized making the flow feel natural - users can read about workshops, see the sign-in option right there, and continue their journey without interruption.
+
+#### **Current Status**
+While I've made significant progress integrating these features, there's still work to be done. The landing page and login integration is functional, but I want to refine the user experience further to make it even more seamless and intuitive.
+
+#### **What Still Needs Work**
+- Fine-tuning the visual flow between sections
+- Improving the mobile experience for the integrated sign-in
+- Making the transition even smoother for first-time users
+- Ensuring the design feels cohesive across all screen sizes
+
+---
 
