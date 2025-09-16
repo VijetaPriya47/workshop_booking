@@ -27,7 +27,7 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 #### **3. 📚 Install Dependencies**
 ```bash
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 #### **4. 🗄️ Database Setup (The Important Part!)**
@@ -58,7 +58,13 @@ python3 manage.py migrate cms
 ```bash
 python3 manage.py createsuperuser
 ```
+
+```bash
+python3 create_superuser_profile.py
+```
 Follow the prompts to create your admin username, email, and password.
+
+
 
 #### **6. 🎉 Fire It Up!**
 ```bash
@@ -74,6 +80,7 @@ python3 manage.py runserver
 - Go to admin panel → Groups
 - Create a group called "instructor" with appropriate permissions
 - Assign instructor role to users as needed
+- Register yourself and tick your email as verified in the profiles tab
 
 ---
 
