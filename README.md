@@ -182,7 +182,8 @@ workshop_booking/
 
 #### **Mobile View**
 
-![Mobile](https://github.com/user-attachments/assets/0a9cb77e-1877-4108-8a5c-e009a1dcef2d)
+![Mobile](https://github.com/user-attachments/assets/77edaff9-4763-45dd-a49f-bf6098ea005e>
+
 
 ### 🧭 **Navigation Components**
 
